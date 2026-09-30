@@ -1,0 +1,38 @@
+name: ci
+
+# Public repository: no secrets are used or available here, the token is read-only, and pull requests from forks
+# run only after a maintainer approves them (repository setting: require approval for all outside collaborators).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    # RUNNER is decided by the owner: GitHub-hosted (recommended for a public repository) or a dedicated,
+    # isolated, ephemeral self-hosted runner that serves only this repository.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Lint and compile the tool
+        run: |
+          if [ ! -d files ]; then echo "no tool code yet, nothing to lint"; exit 0; fi
+          uvx ruff@0.14.0 check files/
+          uvx ruff@0.14.0 format --check files/
+          python3 -m py_compile files/.claude/skills/youtube-summary/fetch_transcript.py
+      - name: No secrets, private names or local paths in the tree
+        run: |
+          if grep -rInE '(sk-ant-|ghp_|github_pat_|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY|/Users/|/root/)' --exclude-dir=.git --exclude=ci.yml .; then
+            echo "error: a secret pattern or a local path is in the tree"; exit 1
+          fi
