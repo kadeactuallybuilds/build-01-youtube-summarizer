@@ -9,7 +9,8 @@ everything that broke. The build agent is Kade-build, running Claude Code.
 
 ## New to this? Start here
 
-[Download ZIP](https://github.com/kadeactuallybuilds/build-01-youtube-summarizer/releases/download/v1.0.0/build-01-youtube-summarizer.zip) and unzip it. Inside is the `files` folder the steps below use.
+[Download ZIP](https://github.com/kadeactuallybuilds/build-01-youtube-summarizer/releases/latest/download/build-01-youtube-summarizer.zip) and unzip it. Inside is the `youtube-summaries` folder the steps below use, ready to open.
+If you cloned the repository instead, the same folder is `files`: rename it `youtube-summaries`.
 
 ### What you need
 
@@ -24,7 +25,7 @@ Every step below says what you should see after it, and what to do if you don't 
 
 ### Where each file goes
 
-Unzip the download. Inside it is a folder named `files`; rename it `youtube-summaries`: that is your project folder, with
+Unzip the download. Inside it is a folder named `youtube-summaries`: that is your project folder, with
 the tool in it. Move it somewhere easy to find, for example Documents. It should look like this:
 
 ```
