@@ -1,0 +1,17 @@
+name: Idea
+description: Suggest an extension or a change to the tool.
+title: "Idea: "
+body:
+  - type: markdown
+    attributes:
+      value: The README lists three good first issues under "Already building? Read this".
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would it do?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would it help?
