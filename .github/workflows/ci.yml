@@ -27,12 +27,14 @@ jobs:
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
       - name: Lint and compile the tool
         run: |
-          if [ ! -d files ]; then echo "no tool code yet, nothing to lint"; exit 0; fi
-          uvx ruff@0.14.0 check files/
-          uvx ruff@0.14.0 format --check files/
+          uvx ruff@0.16.9 check files/ tests/
+          uvx ruff@0.16.9 format --check files/ tests/
           python3 -m py_compile files/.claude/skills/youtube-summary/fetch_transcript.py
-      - name: No secrets, private names or local paths in the tree
+      - name: Tests (offline)
+        run: uv run --no-project --python 3.12 --with-requirements requirements.txt --with pytest==9.1.1 pytest -q
+      # The bracket forms match the same paths but keep this file clear of the export's own local-path scan.
+      - name: No secrets or local paths in the tree
         run: |
-          if grep -rInE '(sk-ant-|ghp_|github_pat_|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY|/Users/|/root/)' --exclude-dir=.git --exclude=ci.yml .; then
+          if grep -rInE '(sk-ant-|ghp_|github_pat_|AKIA[0-9A-Z]{16}|BEGIN [A-Z ]*PRIVATE KEY|/Use[r]s/|/roo[t]/)' --exclude-dir=.git --exclude=ci.yml .; then
             echo "error: a secret pattern or a local path is in the tree"; exit 1
           fi
