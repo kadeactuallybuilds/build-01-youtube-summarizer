@@ -56,10 +56,12 @@ then Hidden items.
    Claude Code.
 2. In the app, open Claude Code (the Code tab) and choose the `youtube-summaries` folder itself as
    the folder to work in, not the `build-kit-01` folder around it.
+
 3. Type `summarize ` and paste a YouTube link, then press Enter.
+
 4. The first time it installs the caption library (one line), then runs `fetch_transcript.py`. If
    it asks first, allow both.
-5. Open the new file in the `summaries` folder.
+5. Open the new file in the `summaries` folder. The app also tells you what it wrote.
 
 The app needs Python 3.12 on your computer. If Claude says Python is missing, do Step 2 below,
 then try again. Prefer the Terminal, or stuck? Steps 1 to 13 below do the same thing by hand.
@@ -163,8 +165,9 @@ If you don't see it: on the YouTube app, use Share, then Copy link.
 
 **Step 10.** In Claude Code, type `summarize ` and paste the link, then press Enter.
 
-You should see: Claude Code asks to run `fetch_transcript.py`. Allow it. Long videos run it several
-times (`--chunk 2`, `--chunk 3`), once per part.
+You should see: Claude Code loads the skill and runs `fetch_transcript.py`. In auto mode (the
+default) it runs it by itself; if it asks first, allow it. Long videos run it several times
+(`--chunk 2`, `--chunk 3`), once per part.
 
 If you don't see it: if Claude Code answers from memory instead of running the fetcher, type
 `use the youtube-summary skill` and try again.

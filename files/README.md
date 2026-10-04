@@ -16,6 +16,7 @@ youtube-summaries/
       youtube-summary/
         SKILL.md                     tells Claude Code how to make the summary
         fetch_transcript.py          reads the video's captions
+        modes/                       study notes, checklist and Obsidian/Notion layouts (Build Kit 01)
   summaries/                         created on first use; your summaries go here
 ```
 
@@ -27,7 +28,7 @@ The `.claude` folder starts with a dot, so your computer may hide it. It is stil
 |---|---|
 | Python | 3.12 |
 | youtube-transcript-api | 1.2.4 |
-| Claude Code | the Code tab of the Claude desktop app 2.19675.0 (rerun of 2026-10-03) |
+| Claude Code | 2.1.288 to 2.1.289 (Claude desktop app 2.19675.0) on 2026-10-03; it updates itself, and newer versions run the same steps |
 
 ## One-line install
 
@@ -43,6 +44,10 @@ If you see "externally-managed-environment", follow Step 4b in the README at the
 1. Open this folder in Claude Code (`claude` in a terminal inside the folder).
 2. Type: `summarize https://www.youtube.com/watch?v=...`
 3. Open the file it names, in the `summaries` folder.
+
+More modes, same link: `study notes <link>` (lecture notes with a self-test), `checklist <link>`
+(a how-to video as numbered steps) and `obsidian <link>` or `notion <link>` (a note for your
+vault). They need the `modes` folder, which comes with Build Kit 01.
 
 No account key is needed. The tool reads public captions only and writes only to `summaries/`.
 

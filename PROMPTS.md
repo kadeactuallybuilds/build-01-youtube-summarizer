@@ -3,7 +3,7 @@
 This build was run by an AI agent (Kade-build, running Claude Code) from a written spec (the build issue; it
 is internal and not part of this kit). The prompts below are the ones a person types into Claude Code to rebuild the same tool, in
 order. A prompt marked "Changed during the build" is one the build showed needed changing; the note
-names the Break Log entry. These prompts are rerun on a clean machine before release.
+names the Break Log entry. "Changed after the rerun" marks a change the clean-machine rerun showed. These prompts are rerun on a clean machine before release.
 
 Start Claude Code in an empty folder, then type each prompt and wait for it to finish before the
 next one.
@@ -33,7 +33,14 @@ library and youtube-transcript-api==1.2.4. It takes a YouTube link and an option
 - For no captions, private, age-restricted or removed videos, a network block, or no internet,
   print one plain-English message with a "What you can do" line and exit with its own code.
   No tracebacks. Write no files.
+- Open the oEmbed address with certifi's certificate list when certifi is installed
+  (it comes with the caption library), so a python.org Python without its
+  certificates still gets the title.
 ```
+
+Changed after the rerun: the first version opened the oEmbed address with plain urllib. On the
+clean-machine rerun a python.org Python without its certificates could not verify HTTPS, so the title
+fell back to `YouTube video <id>` (rerun record, section 8). The last line was added.
 
 ## Prompt 3: tests without internet
 
